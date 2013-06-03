@@ -1,4 +1,5 @@
 *.swp
 *.pyc
+.coverage
 TODO
 env/
