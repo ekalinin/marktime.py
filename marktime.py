@@ -7,7 +7,7 @@ import time
 labels = {}
 
 
-class TimerIt(object):
+class Marker(object):
 
     def __init__(self):
         self.start_time = None
@@ -46,14 +46,14 @@ class TimerIt(object):
 def start(label):
     """Begins the countdown"""
     t = time.time()
-    labels[label] = TimerIt().start(t).dumps()
+    labels[label] = Marker().start(t).dumps()
 
 
 def stop(label, timeat=None, remove_from_labels=False, stop_once=True):
     """Stops the countdown"""
     t = time.time() if not timeat else timeat
 
-    timer = TimerIt().loads(labels[label])
+    timer = Marker().loads(labels[label])
 
     if timer.is_running() or (timer.is_stopped() and not stop_once):
         timer.stop(t)
