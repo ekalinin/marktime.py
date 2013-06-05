@@ -30,11 +30,16 @@ class Marker(object):
     def duration(self):
         return self.end_time - self.start_time
 
-    def dumps(self):
-        return json.dumps({
+    def dumps(self, add_duration=False):
+        export_data = {
             'start_time': self.start_time,
             'end_time': self.end_time
-        })
+        }
+
+        if add_duration or self.is_stopped():
+            export_data['duration'] = self.duration()
+
+        return json.dumps(export_data)
 
     def loads(self, statestring):
         tmp = json.loads(statestring)
@@ -49,9 +54,9 @@ def start(label):
     labels[label] = Marker().start(t).dumps()
 
 
-def stop(label, timeat=None, remove_from_labels=False, stop_once=True):
+def stop(label, at=None, remove_from_labels=False, stop_once=True):
     """Stops the countdown"""
-    t = time.time() if not timeat else timeat
+    t = time.time() if not at else at
 
     timer = Marker().loads(labels[label])
 
