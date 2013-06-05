@@ -30,6 +30,12 @@ class ApiTestCase(unittest.TestCase):
             self.assertEquals(time_diff, i)
 
     @mock.patch('marktime.time.time')
+    def test_float_diffs(self, mock_time):
+        mock_time.return_value = 123
+        marktime.start('test run')
+        self.assertEquals(marktime.stop('test run', at=124.5), 1.5)
+
+    @mock.patch('marktime.time.time')
     def test_stop_twice(self, mock_time):
         mock_time.return_value = 123
         marktime.start('test run')

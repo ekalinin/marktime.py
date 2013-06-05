@@ -14,11 +14,11 @@ class Marker(object):
         self.end_time = None
 
     def start(self, start_time=None):
-        self.start_time = int(start_time) if start_time else time.time()
+        self.start_time = float(start_time) if start_time else time.time()
         return self
 
     def stop(self, end_time=None):
-        self.end_time = int(end_time) if end_time else time.time()
+        self.end_time = float(end_time) if end_time else time.time()
         return self
 
     def is_running(self):
@@ -43,8 +43,8 @@ class Marker(object):
 
     def loads(self, statestring):
         tmp = json.loads(statestring)
-        self.start_time = int(tmp['start_time'])
-        self.end_time = int(tmp['end_time']) if tmp['end_time'] else None
+        self.start_time = float(tmp['start_time'])
+        self.end_time = float(tmp['end_time']) if tmp['end_time'] else None
         return self
 
 
