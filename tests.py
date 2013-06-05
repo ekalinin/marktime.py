@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import json
+import random
+
 import mock
 import unittest
 
@@ -44,6 +46,20 @@ class ApiTestCase(unittest.TestCase):
         self.assertEquals(marktime.stop('test run', at=125), 1)
         self.assertEquals(marktime.stop('test run', at=125,
                                         stop_once=False), 2)
+
+    @mock.patch('marktime.time.time')
+    def test_real_times(self, mock_time):
+        start_time = 1370451294.106749
+        diff_time = random.random() * 100
+        stop_time = start_time + diff_time
+        print start_time
+        print stop_time
+
+        mock_time.return_value = start_time
+        marktime.start('test run')
+        mock_time.return_value = stop_time
+        self.assertEquals(round(marktime.stop('test run'), 4),
+                          round(diff_time, 4))
 
     def test_remove_from_labels(self):
         marktime.start('test run')
