@@ -3,3 +3,6 @@
 .coverage
 TODO
 env/
+build/
+dist/
+marktime.egg-info/
