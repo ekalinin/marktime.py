@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import json
 import random
 
 import mock
@@ -80,9 +79,7 @@ class ApiTestCase(unittest.TestCase):
         time_diff = marktime.stop('test run', at=124,
                                   remove_from_labels=False)
 
-        marker_data = json.loads(marktime.labels['test run'])
-
-        self.assertEquals(float(marker_data['duration']), time_diff)
+        self.assertEquals(marktime.labels['test run']['duration'], time_diff)
 
     def test_duration(self):
         start_time = 1370451294

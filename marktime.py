@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import json
 import time
 
 
@@ -39,12 +38,11 @@ class Marker(object):
         if add_duration or self.is_stopped():
             export_data['duration'] = self.duration()
 
-        return json.dumps(export_data)
+        return export_data
 
-    def loads(self, statestring):
-        tmp = json.loads(statestring)
-        self.start_time = float(tmp['start_time'])
-        self.end_time = float(tmp['end_time']) if tmp['end_time'] else None
+    def loads(self, data):
+        self.start_time = data['start_time']
+        self.end_time = data['end_time'] if data['end_time'] else None
         return self
 
 
@@ -74,10 +72,8 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
 def duration(label, stop=True):
     """Returns durattion in seconds for label"""
 
-    marker = json.loads(labels[label])
-
-    if "duration" in marker:
-        return float(marker["duration"])
+    if "duration" in labels[label]:
+        return labels[label]["duration"]
 
     if stop:
         return stop(label)
