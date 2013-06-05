@@ -48,15 +48,15 @@ class Marker(object):
         return self
 
 
-def start(label):
+def start(label, at=None):
     """Begins the countdown"""
-    t = time.time()
+    t = at if at is not None else time.time()
     labels[label] = Marker().start(t).dumps()
 
 
 def stop(label, at=None, remove_from_labels=False, stop_once=True):
     """Stops the countdown"""
-    t = time.time() if not at else at
+    t = at if at is not None else time.time()
 
     timer = Marker().loads(labels[label])
 

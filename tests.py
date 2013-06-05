@@ -18,6 +18,10 @@ class ApiTestCase(unittest.TestCase):
 
         self.assertEquals(marktime.stop('test run', at=124), 1)
 
+    def test_start_stop_at(self):
+        marktime.start('test run', at=123)
+        self.assertEquals(marktime.stop('test run', at=124), 1)
+
     @mock.patch('marktime.time.time')
     def test_severals_markers(self, mock_time):
         start_time = 123
