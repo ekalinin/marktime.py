@@ -69,3 +69,17 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
         labels[label] = timer.dumps()
 
     return timer.duration()
+
+
+def duration(label, stop=True):
+    """Returns durattion in seconds for label"""
+
+    marker = json.loads(labels[label])
+
+    if "duration" in marker:
+        return float(marker["duration"])
+
+    if stop:
+        return stop(label)
+    else:
+        return None
