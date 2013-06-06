@@ -1,9 +1,16 @@
+.PHONY: env27 env32 clean test clean-env release release-github release-pypi update-pypi
 
 env27:
-	@virtualenv env27 --python=python2.7 && . env27/bin/activate && pip install -r requirements.txt
+	@virtualenv env27 --python=python2.7 && \
+		. env27/bin/activate && \
+		pip install -r requirements.txt && \
+		python setup.py install
 
 env32:
-	@virtualenv env32 --python=python3.2 && . env32/bin/activate && pip install -r requirements.txt
+	@virtualenv env32 --python=python3.2 && \
+		. env32/bin/activate && \
+		pip install -r requirements.txt && \
+		python setup.py install
 
 clear-env:
 	@rm -rf env27
