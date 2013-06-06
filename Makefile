@@ -19,3 +19,15 @@ clean:
 	@rm -rf build/
 	@rm -rf dist/
 	@rm -rf marktime.egg-info/
+
+release-github:
+	git tag `grep "version =" marktime.py | grep -o -E '[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}'`
+	git push --tags origin master
+
+release-pypi:
+	python setup.py sdist upload
+
+update-pypi:
+	python setup.py register
+
+release: release-github release-pypi
