@@ -26,10 +26,10 @@ class ApiTestCase(unittest.TestCase):
         start_time = 123
         markers_count = 10
         mock_time.return_value = start_time
-        for i in xrange(1, markers_count):
+        for i in range(1, markers_count):
             marktime.start('test run %d' % i)
 
-        for i in xrange(1, markers_count):
+        for i in range(1, markers_count):
             time_diff = marktime.stop('test run %d' % i,
                                       at=(start_time + i))
             self.assertEquals(time_diff, i)
@@ -55,8 +55,6 @@ class ApiTestCase(unittest.TestCase):
         start_time = 1370451294.106749
         diff_time = random.random() * 100
         stop_time = start_time + diff_time
-        print start_time
-        print stop_time
 
         mock_time.return_value = start_time
         marktime.start('test run')
