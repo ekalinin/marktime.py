@@ -1,5 +1,5 @@
-marktime
-========
+marktime.py
+===========
 
 Simple python module for mark time.
 
