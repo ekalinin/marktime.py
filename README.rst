@@ -1,7 +1,7 @@
 marktime
 ========
 
-Simple python module for marking time.
+Simple python module for mark time.
 
 Inspired by two functions from node.js:
 
@@ -86,6 +86,6 @@ API
 License
 -------
 
-See `LICENSE <https://github.com/ekalinin/marktime/blob/master/LICENSE>`_
+See `LICENSE <https://github.com/ekalinin/marktime.py/blob/master/LICENSE>`_
 file.
 
