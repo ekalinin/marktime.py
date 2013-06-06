@@ -5,8 +5,8 @@ Simple python module for mark time.
 
 Inspired by two functions from node.js:
 
-  * `console.time <http://nodejs.org/docs/v0.10.10/api/all.html#all_console_time_label>`_
-  * `console.timeEnd <http://nodejs.org/docs/v0.10.10/api/all.html#all_console_timeend_label>`_
+  * `console.time <http://nodejs.org/api/all.html#all_console_time_label>`_
+  * `console.timeEnd <http://nodejs.org/api/all.html#all_console_timeend_label>`_
 
 
 Usage
@@ -34,7 +34,8 @@ Usage
 
     marktime.start('some task # 3')
 
-    marktime.labels
+    import json
+    print json.dumps(marktime.labels, indent=4)
     {
         'some another task': {
             'duration': 14.805735111236572,
