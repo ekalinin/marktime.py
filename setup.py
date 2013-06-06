@@ -1,11 +1,15 @@
-from setuptools import setup
+#!/usr/bin/env python
+
 import os
+from setuptools import setup
+from marktime import version as module_version
+
 
 readme_path = os.path.join(os.path.dirname(__file__), 'README.rst')
 
 setup(
     name='marktime',
-    version='0.1.0',
+    version=module_version,
     py_modules=['marktime'],
 
     description='Python timer module for humans.',
