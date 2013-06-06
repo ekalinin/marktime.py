@@ -19,7 +19,7 @@ setup(
     author='Eugene Kalinin',
     author_email='e.v.kalinin@gmail.com',
 
-    url='https://github.com/ekalinin/marktime',
+    url='https://github.com/ekalinin/marktime.py',
 
     keywords=[
         'timer', 'stopwatch', 'time'
