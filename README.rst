@@ -8,6 +8,13 @@ Inspired by two functions from node.js:
   * `console.time <http://nodejs.org/api/all.html#all_console_time_label>`_
   * `console.timeEnd <http://nodejs.org/api/all.html#all_console_timeend_label>`_
 
+Main features:
+
+  * easy to use
+  * no external dependencies
+  * 100% test coverage
+  * works with Python 2.7 and 3.3
+
 
 Usage
 -----
