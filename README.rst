@@ -58,12 +58,12 @@ Usage
 API
 ---
 
-* **marktime.start**(label, at=None)
+* **marktime.start** (label, at=None)
 
   * ``label`` — marker label. String. Required.
   * ``at`` — time to start the countdown. If ``None`` then uses ``time.time()``.
 
-* **marktime.stop**(label, remove_from_labels=False, stop_once=True)
+* **marktime.stop** (label, remove_from_labels=False, stop_once=True)
 
   * ``label`` — marker label. String. Required.
   * ``at`` — time to stop the countdown. If ``None`` then uses ``time.time()``
@@ -73,14 +73,14 @@ API
     is allready stopped thet it stopped it again. And thereafter the duration
     for the certain ``label`` will be increased. 
 
-* **marktime.duration**(label, stop=True)
+* **marktime.duration** (label, stop=True)
 
   * ``label`` — marker label. String. Required.
   * ``stop`` — if ``True`` then the countdown for the certain ``label``
     will be stopped. If ``False`` and the countdown for the certain ``label``
     is not stopped then returns ``None``.
 
-* **marktime.labels** — Global ``dict`` that stores all the labels for time markers.
+* **marktime.labels** — global ``dict`` that stores all the labels for time markers.
 
 
 License
