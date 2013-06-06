@@ -2,7 +2,10 @@
 
 import time
 
+# module version
+version = '0.1.0'
 
+# global dict where all statictics are stored
 labels = {}
 
 
