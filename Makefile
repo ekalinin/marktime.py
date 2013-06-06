@@ -1,9 +1,19 @@
 
-env:
-	@rm -rf env && virtualenv env && . env/bin/activate && pip install -r requirements.txt
+env27:
+	@virtualenv env27 --python=python2.7 && . env27/bin/activate && pip install -r requirements.txt
 
-test:
-	@. env/bin/activate && nosetests --with-coverage --cover-erase --cover-package=marktime
+env32:
+	@virtualenv env32 --python=python3.2 && . env32/bin/activate && pip install -r requirements.txt
+
+clear-env:
+	@rm -rf env27
+	@rm -rf env32
+
+test: env27 env32
+	@echo 'testing for python2.7'
+	@. env27/bin/activate && nosetests --with-coverage --cover-erase --cover-package=marktime
+	@echo 'testing for python3.2'
+	@. env32/bin/activate && nosetests --with-coverage --cover-erase --cover-package=marktime
 
 clean:
 	@rm -rf build/
