@@ -23,6 +23,10 @@ class Marker(object):
         self.end_time = float(end_time) if end_time else time.time()
         return self
 
+    def sleep(self, duration):
+        time.sleep(duration)
+        return self
+
     def is_running(self):
         return self.start_time is not None and self.end_time is None
 
@@ -73,7 +77,7 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
 
 
 def duration(label, stop=True):
-    """Returns durattion in seconds for label"""
+    """Returns duration in seconds for label"""
 
     if "duration" in labels[label]:
         return labels[label]["duration"]
