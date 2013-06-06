@@ -81,12 +81,13 @@ API
     is allready stopped thet it stopped it again. And thereafter the duration
     for the certain ``label`` will be increased. 
 
-* **marktime.duration** (label, stop=True)
+* **marktime.duration** (label, stop_it=True, stop_at=None)
 
   * ``label`` — marker label. String. Required.
-  * ``stop`` — if ``True`` then the countdown for the certain ``label``
+  * ``stop_it`` — if ``True`` then the countdown for the certain ``label``
     will be stopped. If ``False`` and the countdown for the certain ``label``
     is not stopped then returns ``None``.
+  * ``stop_at`` — passed into ``stop`` function if ``stop_it`` == ``True``
 
 * **marktime.labels** — global ``dict`` that stores all the labels for time markers.
 

@@ -3,7 +3,7 @@
 import time
 
 # module version
-version = '0.1.0'
+version = '0.1.1'
 
 # global dict where all statictics are stored
 labels = {}
@@ -76,13 +76,13 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
     return timer.duration()
 
 
-def duration(label, stop=True):
+def duration(label, stop_it=True, stop_at=None):
     """Returns duration in seconds for label"""
 
     if "duration" in labels[label]:
         return labels[label]["duration"]
 
-    if stop:
-        return stop(label)
+    if stop_it:
+        return stop(label, at=stop_at)
     else:
         return None

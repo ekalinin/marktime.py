@@ -88,6 +88,20 @@ class ApiTestCase(unittest.TestCase):
         marktime.stop('test run', at=stop_time)
         self.assertEquals(marktime.duration('test run'), diff_time)
 
+    def test_duration_None(self):
+        marktime.start('test run')
+        self.assertEquals(marktime.duration('test run', stop_it=False), None)
+
+    def test_duration_with_stop(self):
+        start_time = 1370451294
+        diff_time = round(random.random() * 100)
+        stop_time = start_time + diff_time
+
+        marktime.start('test run', at=start_time)
+        self.assertEquals(
+            marktime.duration('test run', stop_it=True, stop_at=stop_time),
+            diff_time)
+
     def test_sleep(self):
         diff_time = 0.5
         marker = marktime.Marker()
