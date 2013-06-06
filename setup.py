@@ -14,7 +14,7 @@ setup(
 
     description='Python timer module for humans.',
     long_description=open(readme_path).read(),
-    license=open('LICENSE').read(),
+    license='MIT',
 
     author='Eugene Kalinin',
     author_email='e.v.kalinin@gmail.com',
