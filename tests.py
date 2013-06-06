@@ -102,6 +102,9 @@ class ApiTestCase(unittest.TestCase):
             marktime.duration('test run', stop_it=True, stop_at=stop_time),
             diff_time)
 
+
+class InternalsTestCase(unittest.TestCase):
+
     def test_sleep(self):
         diff_time = 0.5
         marker = marktime.Marker()
@@ -109,3 +112,21 @@ class ApiTestCase(unittest.TestCase):
         self.assertEquals(
             round(marker.start().sleep(diff_time).stop().duration(), 2),
             round(diff_time, 2))
+
+    def test_continue(self):
+        marker = marktime.Marker().start().stop().coninue()
+        self.assertTrue(marker.is_running())
+
+    def test_is_running(self):
+        marker = marktime.Marker()
+
+        self.assertFalse(marker.is_running())
+        self.assertTrue(marker.start().is_running())
+        self.assertFalse(marker.stop().is_running())
+
+    def test_is_stopped(self):
+        marker = marktime.Marker()
+
+        self.assertFalse(marker.is_stopped())
+        self.assertFalse(marker.start().is_stopped())
+        self.assertTrue(marker.stop().is_stopped())

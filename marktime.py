@@ -36,6 +36,11 @@ class Marker(object):
     def duration(self):
         return self.end_time - self.start_time
 
+    def coninue(self):
+        if self.is_stopped():
+            self.end_time = None
+        return self
+
     def dumps(self, add_duration=False):
         export_data = {
             'start_time': self.start_time,
