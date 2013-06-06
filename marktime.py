@@ -68,6 +68,9 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
     """Stops the countdown"""
     t = at if at is not None else time.time()
 
+    if label not in labels:
+        return None
+
     timer = Marker().loads(labels[label])
 
     if timer.is_running() or (timer.is_stopped() and not stop_once):
@@ -83,6 +86,9 @@ def stop(label, at=None, remove_from_labels=False, stop_once=True):
 
 def duration(label, stop_it=True, stop_at=None):
     """Returns duration in seconds for label"""
+
+    if label not in labels:
+        return None
 
     if "duration" in labels[label]:
         return labels[label]["duration"]

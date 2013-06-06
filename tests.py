@@ -90,7 +90,7 @@ class ApiTestCase(unittest.TestCase):
 
     def test_duration_None(self):
         marktime.start('test run')
-        self.assertEquals(marktime.duration('test run', stop_it=False), None)
+        self.assertIsNone(marktime.duration('test run', stop_it=False))
 
     def test_duration_with_stop(self):
         start_time = 1370451294
@@ -101,6 +101,12 @@ class ApiTestCase(unittest.TestCase):
         self.assertEquals(
             marktime.duration('test run', stop_it=True, stop_at=stop_time),
             diff_time)
+
+    def test_stop_label_not_exists(self):
+        self.assertIsNone(marktime.stop('not existance label'))
+
+    def test_duration_label_not_exists(self):
+        self.assertIsNone(marktime.duration('not existance label'))
 
 
 class InternalsTestCase(unittest.TestCase):
