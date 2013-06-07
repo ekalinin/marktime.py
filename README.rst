@@ -30,7 +30,7 @@ Usage
     marktime.start('some task')
     marktime.start('some another task')
 
-    marktime.stop('some task')
+    marktime.stop('some task').seconds
     8.757422924041748
 
     marktime.stop('some another task').seconds
