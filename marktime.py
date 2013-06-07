@@ -4,7 +4,7 @@ import time
 from contextlib import contextmanager
 
 # module version
-version = '0.1.1'
+version = '0.2.0'
 
 # global dict where all statictics are stored
 labels = {}
