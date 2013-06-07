@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import time
 import random
 
 import mock
@@ -136,3 +137,11 @@ class InternalsTestCase(unittest.TestCase):
         self.assertFalse(marker.is_stopped())
         self.assertFalse(marker.start().is_stopped())
         self.assertTrue(marker.stop().is_stopped())
+
+    def test_with(self):
+        diff_time = 0.5
+        with marktime.Marker() as m:
+            time.sleep(diff_time)
+            self.assertEquals(
+                round(m.duration(), 2),
+                round(diff_time, 2))

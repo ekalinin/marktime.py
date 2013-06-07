@@ -33,8 +33,17 @@ class Marker(object):
     def is_stopped(self):
         return self.start_time is not None and self.end_time is not None
 
-    def duration(self):
-        return self.end_time - self.start_time
+    def duration(self, at=None):
+        res = None
+
+        if self.is_running():
+            end_time = at if at else time.time()
+            res = end_time - self.start_time
+
+        if self.is_stopped():
+            res = self.end_time - self.start_time
+
+        return res
 
     def coninue(self):
         if self.is_stopped():
@@ -56,6 +65,13 @@ class Marker(object):
         self.start_time = data['start_time']
         self.end_time = data['end_time'] if data['end_time'] else None
         return self
+
+    def __enter__(self):
+        self.start()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.stop()
 
 
 def start(label, at=None):
