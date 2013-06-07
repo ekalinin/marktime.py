@@ -41,24 +41,30 @@ Usage
 
     marktime.start('some task # 3')
 
+    with marktime.stopwatch('some task # 4'):
+        marktime.time.sleep(1)
+
     import json
     print json.dumps(marktime.labels, indent=4)
     {
-        'some another task': {
-            'duration': 14.805735111236572,
-            'start_time': 1370453758.064955,
-            'end_time': 1370453772.87069
+        "some another task": {
+            "duration": 14.805735111236572,
+            "start_time": 1370453758.064955,
+            "end_time": 1370453772.87069
         },
-
-        'some task # 3': {
-            'start_time': 1370453892.025603,
-            'end_time': None
+        "some task # 3": {
+            "start_time": 1370453892.025603,
+            "end_time": None
         },
-
-        'some task': {
-            'duration': 8.757422924041748,
-            'start_time': 1370453753.185846,
-            'end_time': 1370453761.943269
+        "some task # 4": {
+            "duration": 1.00120210647583,
+            "start_time": 1370638027.000799,
+            "end_time": 1370638028.002001
+        },
+        "some task": {
+            "duration": 8.757422924041748,
+            "start_time": 1370453753.185846,
+            "end_time": 1370453761.943269
         }
     }
 
@@ -88,6 +94,8 @@ API
     will be stopped. If ``False`` and the countdown for the certain ``label``
     is not stopped then returns ``None``.
   * ``stop_at`` — passed into ``stop`` function if ``stop_it`` == ``True``
+
+* **marktime.stopwatch** (label) — context manager (``with`` statement support)
 
 * **marktime.labels** — global ``dict`` that stores all the labels for time markers.
 
