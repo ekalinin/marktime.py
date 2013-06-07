@@ -10,6 +10,24 @@ version = '0.1.1'
 labels = {}
 
 
+class Duration(object):
+
+    def __init__(self, seconds):
+        self.value = seconds
+
+    @property
+    def seconds(self):
+        return self.value
+
+    @property
+    def msecs(self):
+        return self.seconds * 1000
+
+    @property
+    def minutes(self):
+        return self.seconds / 60
+
+
 class Marker(object):
 
     def __init__(self):
@@ -44,7 +62,7 @@ class Marker(object):
         if self.is_stopped():
             res = self.end_time - self.start_time
 
-        return res
+        return Duration(res)
 
     def coninue(self):
         if self.is_stopped():
@@ -58,7 +76,7 @@ class Marker(object):
         }
 
         if add_duration or self.is_stopped():
-            export_data['duration'] = self.duration()
+            export_data['duration'] = self.duration().seconds
 
         return export_data
 
@@ -109,7 +127,7 @@ def duration(label, stop_it=True, stop_at=None):
         return None
 
     if "duration" in labels[label]:
-        return labels[label]["duration"]
+        return Duration(labels[label]["duration"])
 
     if stop_it:
         return stop(label, at=stop_at)

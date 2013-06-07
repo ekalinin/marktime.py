@@ -16,11 +16,11 @@ class ApiTestCase(unittest.TestCase):
         mock_time.return_value = 123
         marktime.start('test run')
 
-        self.assertEquals(marktime.stop('test run', at=124), 1)
+        self.assertEquals(marktime.stop('test run', at=124).seconds, 1)
 
     def test_start_stop_at(self):
         marktime.start('test run', at=123)
-        self.assertEquals(marktime.stop('test run', at=124), 1)
+        self.assertEquals(marktime.stop('test run', at=124).msecs, 1000)
 
     @mock.patch('marktime.time.time')
     def test_severals_markers(self, mock_time):
@@ -32,24 +32,24 @@ class ApiTestCase(unittest.TestCase):
 
         for i in range(1, markers_count):
             time_diff = marktime.stop('test run %d' % i,
-                                      at=(start_time + i))
+                                      at=(start_time + i)).seconds
             self.assertEquals(time_diff, i)
 
     @mock.patch('marktime.time.time')
     def test_float_diffs(self, mock_time):
         mock_time.return_value = 123
         marktime.start('test run')
-        self.assertEquals(marktime.stop('test run', at=124.5), 1.5)
+        self.assertEquals(marktime.stop('test run', at=124.5).seconds, 1.5)
 
     @mock.patch('marktime.time.time')
     def test_stop_twice(self, mock_time):
         mock_time.return_value = 123
         marktime.start('test run')
 
-        self.assertEquals(marktime.stop('test run', at=124), 1)
-        self.assertEquals(marktime.stop('test run', at=125), 1)
-        self.assertEquals(marktime.stop('test run', at=125,
-                                        stop_once=False), 2)
+        self.assertEquals(marktime.stop('test run', at=124).seconds, 1)
+        self.assertEquals(marktime.stop('test run', at=125).seconds, 1)
+        self.assertEquals(marktime.stop('test run', at=183,
+                                        stop_once=False).minutes, 1)
 
     @mock.patch('marktime.time.time')
     def test_real_times(self, mock_time):
@@ -60,7 +60,7 @@ class ApiTestCase(unittest.TestCase):
         mock_time.return_value = start_time
         marktime.start('test run')
         mock_time.return_value = stop_time
-        self.assertEquals(round(marktime.stop('test run'), 4),
+        self.assertEquals(round(marktime.stop('test run').seconds, 4),
                           round(diff_time, 4))
 
     def test_remove_from_labels(self):
@@ -76,7 +76,7 @@ class ApiTestCase(unittest.TestCase):
         mock_time.return_value = 123
         marktime.start('test run')
         time_diff = marktime.stop('test run', at=124,
-                                  remove_from_labels=False)
+                                  remove_from_labels=False).seconds
 
         self.assertEquals(marktime.labels['test run']['duration'], time_diff)
 
@@ -87,7 +87,7 @@ class ApiTestCase(unittest.TestCase):
 
         marktime.start('test run', at=start_time)
         marktime.stop('test run', at=stop_time)
-        self.assertEquals(marktime.duration('test run'), diff_time)
+        self.assertEquals(marktime.duration('test run').seconds, diff_time)
 
     def test_duration_None(self):
         marktime.start('test run')
@@ -100,7 +100,8 @@ class ApiTestCase(unittest.TestCase):
 
         marktime.start('test run', at=start_time)
         self.assertEquals(
-            marktime.duration('test run', stop_it=True, stop_at=stop_time),
+            marktime.duration('test run', stop_it=True,
+                              stop_at=stop_time).seconds,
             diff_time)
 
     def test_stop_label_not_exists(self):
@@ -115,7 +116,7 @@ class ApiTestCase(unittest.TestCase):
             time.sleep(diff_time)
 
         self.assertEquals(
-            round(marktime.duration('test_stopwatch'), 2),
+            round(marktime.duration('test_stopwatch').seconds, 2),
             round(diff_time, 2))
 
 
@@ -126,7 +127,8 @@ class InternalsTestCase(unittest.TestCase):
         marker = marktime.Marker()
 
         self.assertEquals(
-            round(marker.start().sleep(diff_time).stop().duration(), 2),
+            round(marker.start().sleep(diff_time)
+                        .stop().duration().seconds, 2),
             round(diff_time, 2))
 
     def test_continue(self):
@@ -152,5 +154,5 @@ class InternalsTestCase(unittest.TestCase):
         with marktime.Marker() as m:
             time.sleep(diff_time)
             self.assertEquals(
-                round(m.duration(), 2),
+                round(m.duration().seconds, 2),
                 round(diff_time, 2))
