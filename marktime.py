@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import time
+from contextlib import contextmanager
 
 # module version
 version = '0.1.1'
@@ -77,7 +78,8 @@ class Marker(object):
 def start(label, at=None):
     """Begins the countdown"""
     t = at if at is not None else time.time()
-    labels[label] = Marker().start(t).dumps()
+    marker = Marker().start(t)
+    labels[label] = marker.dumps()
 
 
 def stop(label, at=None, remove_from_labels=False, stop_once=True):
@@ -113,3 +115,10 @@ def duration(label, stop_it=True, stop_at=None):
         return stop(label, at=stop_at)
     else:
         return None
+
+
+@contextmanager
+def stopwatch(label):
+    marker = start(label)
+    yield marker
+    stop(label)

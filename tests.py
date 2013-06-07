@@ -109,6 +109,15 @@ class ApiTestCase(unittest.TestCase):
     def test_duration_label_not_exists(self):
         self.assertIsNone(marktime.duration('not existance label'))
 
+    def test_stopwatch(self):
+        diff_time = 0.5
+        with marktime.stopwatch('test_stopwatch'):
+            time.sleep(diff_time)
+
+        self.assertEquals(
+            round(marktime.duration('test_stopwatch'), 2),
+            round(diff_time, 2))
+
 
 class InternalsTestCase(unittest.TestCase):
 
