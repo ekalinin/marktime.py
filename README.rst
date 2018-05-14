@@ -30,13 +30,13 @@ Usage
     marktime.start('some task')
     marktime.start('some another task')
 
-    marktime.stop('some task').seconds
+    marktime.stop('some task').sec
     8.757422924041748
 
-    marktime.stop('some another task').seconds
+    marktime.stop('some another task').sec
     14.805735111236572
 
-    marktime.duration('some another task').msecs
+    marktime.duration('some another task').msec
     14805.735111236572
 
     marktime.start('some task # 3')

@@ -12,20 +12,20 @@ labels = {}
 
 class Duration(object):
 
-    def __init__(self, seconds):
-        self.value = seconds
+    def __init__(self, sec):
+        self.value = sec
 
     @property
-    def seconds(self):
+    def sec(self):
         return self.value
 
     @property
-    def msecs(self):
-        return self.seconds * 1000
+    def msec(self):
+        return self.sec * 1000
 
     @property
-    def minutes(self):
-        return self.seconds / 60
+    def min(self):
+        return self.sec / 60
 
 
 class Marker(object):
@@ -76,7 +76,7 @@ class Marker(object):
         }
 
         if add_duration or self.is_stopped():
-            export_data['duration'] = self.duration().seconds
+            export_data['duration'] = self.duration().sec
 
         return export_data
 
